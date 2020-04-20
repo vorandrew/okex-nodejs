@@ -1,0 +1,114 @@
+{
+  "name": "okex-nodejs",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rm -rf ./lib",
+    "build": "babel -d lib src --minified --ignore 'src/dev.js'",
+    "prepare": "yarn build",
+    "lint": "eslint src",
+    "test": "jest src --forceExit --silent -i -b",
+    "tdd": "DEBUG=okex:* jest src --watch -i",
+    "dev": "DEBUG=okex:* nodemon --exec babel-node src/dev.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "pre-push": "yarn test"
+    }
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "allowImportExportEverywhere": false,
+      "codeFrame": false,
+      "impliedStrict": true
+    },
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "arrowParens": "avoid",
+          "semi": false,
+          "singleQuote": true,
+          "printWidth": 120,
+          "tabWidth": 2
+        }
+      ]
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "roots": [
+      "src"
+    ],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "got": "^10.7.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.2.6",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "debug": "*",
+    "nodemon": "^2.0.2",
+    "prettier": "^2.0.4"
+  },
+  "description": "OKEX v3 NodeJS library",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/santacruz123/okex-nodejs.git"
+  },
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/santacruz123/okex-nodejs/issues"
+  },
+  "homepage": "https://github.com/santacruz123/okex-nodejs#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "okex",
+    "nodejs",
+    "v3"
+  ],
+  "author": "Andrey Vorobyov <vorandrew@gmail.com>"
+}
